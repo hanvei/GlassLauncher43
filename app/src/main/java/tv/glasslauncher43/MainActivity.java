@@ -155,22 +155,16 @@ public class MainActivity extends Activity {
       final File selected=files[index];
       if(selected.getAbsolutePath().equals(wallpaperPath)&&wallpaper!=null)return;
       final int selectedIndex=index;
+      // A cold start has no previous wallpaper frame to retain. Load the
+      // selected image before the View is attached so HOME cannot briefly
+      // expose the fallback dunes while the background loader starts.
+      if(wallpaper==null){
+        Bitmap initial=decodeWallpaper(selected);
+        if(initial!=null){wallpaper=initial;wallpaperPath=selected.getAbsolutePath();return;}
+      }
       wallpaperLoading=true;
       new Thread(new Runnable(){public void run(){
-        Bitmap decoded=null;
-        try{
-          BitmapFactory.Options bounds=new BitmapFactory.Options();
-          bounds.inJustDecodeBounds=true;
-          BitmapFactory.decodeFile(selected.getAbsolutePath(),bounds);
-          if(bounds.outWidth>0&&bounds.outHeight>0){
-            BitmapFactory.Options options=new BitmapFactory.Options();
-            options.inPreferredConfig=Bitmap.Config.RGB_565;
-            options.inSampleSize=1;
-            while(Math.max(bounds.outWidth,bounds.outHeight)/options.inSampleSize>1920)
-              options.inSampleSize*=2;
-            decoded=BitmapFactory.decodeFile(selected.getAbsolutePath(),options);
-          }
-        }catch(OutOfMemoryError ignored){}catch(Exception ignored){}
+        Bitmap decoded=decodeWallpaper(selected);
         final Bitmap ready=decoded;
         post(new Runnable(){public void run(){
           wallpaperLoading=false;
@@ -184,6 +178,21 @@ public class MainActivity extends Activity {
           invalidate();
         }});
       }},"wallpaper-loader").start();
+    }
+
+    Bitmap decodeWallpaper(File selected){
+      try{
+        BitmapFactory.Options bounds=new BitmapFactory.Options();
+        bounds.inJustDecodeBounds=true;
+        BitmapFactory.decodeFile(selected.getAbsolutePath(),bounds);
+        if(bounds.outWidth<=0||bounds.outHeight<=0)return null;
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inPreferredConfig=Bitmap.Config.RGB_565;
+        options.inSampleSize=1;
+        while(Math.max(bounds.outWidth,bounds.outHeight)/options.inSampleSize>1920)
+          options.inSampleSize*=2;
+        return BitmapFactory.decodeFile(selected.getAbsolutePath(),options);
+      }catch(OutOfMemoryError ignored){return null;}catch(Exception ignored){return null;}
     }
 
     void collect(PackageManager pm,String category,HashSet<String> seen) {
