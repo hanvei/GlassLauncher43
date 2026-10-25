@@ -2,6 +2,24 @@
 
 GlassLauncher43 is a lightweight Android TV launcher designed for older, low-memory televisions running Android 4.3 (API 18). It uses the Android framework directly and has no third-party runtime dependencies.
 
+## Companion firmware for Letv S50 Air
+
+The optional HOME-key fix firmware, exact model restrictions, flashing guide, checksums, patch details, and recovery notes are maintained on the [`firmware-homefix`](https://github.com/hanvei/GlassLauncher43/tree/firmware-homefix/firmware) branch.
+
+The firmware is only for **Letv S50 Air / S2-50F**, board **BD_MST181B_D01A**, device **mstarnapoli**, Android **4.3**, build **V2202RCN02C060072B08012N**. Read the Chinese firmware guide before downloading or flashing it.
+
+## Screenshots
+
+### Default dune background
+
+![GlassLauncher43 default dune home screen](docs/images/home-default-dunes.png)
+
+### Rotating wallpaper
+
+Place images in `/sdcard/壁纸`. The launcher rotates them automatically and keeps the same lightweight TV layout.
+
+![GlassLauncher43 home screen with a rotating wallpaper](docs/images/home-wallpaper.png)
+
 ## Features
 
 - Remote-control navigation with D-pad, OK, Back, and Menu keys
