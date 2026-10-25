@@ -6,7 +6,7 @@ GlassLauncher43 is a lightweight Android TV launcher designed for older, low-mem
 
 The optional HOME-key fix firmware, exact model restrictions, flashing guide, checksums, patch details, and recovery notes are maintained on the [`firmware-homefix`](https://github.com/hanvei/GlassLauncher43/tree/firmware-homefix/firmware) branch.
 
-The firmware is only for **Letv S50 Air / S2-50F**, board **BD_MST181B_D01A**, device **mstarnapoli**, Android **4.3**, build **V2202RCN02C060072B08012N**. Read the Chinese firmware guide before downloading or flashing it.
+The firmware was tested on **Letv X3-43 / S243F**, board **BD_MST181B_D01A**, device **mstarnapoli**, Android **4.3**, build **V2202RCN02C060072B08012N**. This modified third-party ROM identifies itself internally as S50 Air / S2-50F, so read the Chinese firmware guide and match every identifier before flashing.
 
 ## Screenshots
 
