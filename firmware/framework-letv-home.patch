@@ -1,0 +1,9 @@
+--- framework-letv/original/letv/desktop/DesktopManagerService.java
++++ framework-letv/homefix/letv/desktop/DesktopManagerService.java
+@@ -596,7 +596,6 @@
+         Intent intent = new Intent("android.intent.action.MAIN", (Uri) null);
+         intent.addCategory("android.intent.category.HOME");
+         intent.addFlags(270532608);
+-        intent.setPackage(DesktopManager.LAUNCHER_PACKAGENAME);
+         return intent;
+     }
