@@ -1,0 +1,19 @@
+# Android / Gradle
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.log
+
+# Local device backups and reverse-engineering material
+recovery/
+*.apk
+*.apks
+*.aab
+*.tar
+
